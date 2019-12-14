@@ -2,9 +2,9 @@
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <router-link to="/" class="navbar-left"><img class="logo" src="../src/assets/laborocity_logo_main.png"></router-link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars"></i>
+      </span>
     </nav>
     <router-view/>
   </div>
@@ -26,6 +26,13 @@
   height: 60px;
   left: 0px;
   top: 0px;
+}
+.navbar-toggler-icon{
+  color: #2C7DFA;
+  font-size:25px;
+}
+.navbar-light .navbar-toggler-icon {
+    background-image: none;
 }
 .logo {
   position: absolute;
