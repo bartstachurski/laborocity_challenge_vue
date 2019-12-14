@@ -1,31 +1,38 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <router-link to="/" class="navbar-left"><img class="logo" src="../src/assets/laborocity_logo_main.png"></router-link>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    </nav>
     <router-view/>
   </div>
 </template>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Neuton', serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
+.navbar {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+}
+.logo {
+  position: absolute;
+  width: 154.78px;
+  height: 29.3px;
+  left: 25px;
+  top: 15.52px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

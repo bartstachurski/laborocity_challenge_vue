@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
-    <h1>{{ user }}</h1>
+    <!-- <h1>{{ user }}</h1> -->
+    <!-- <button v-on:click="changeEmail">Click me to change user.name to Bartoast</button> -->
   </div>
 </template>
 
@@ -14,7 +14,6 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!",
       user: {}
     };
   },
@@ -23,6 +22,10 @@ export default {
       this.user = response.data;
     });
   },
-  methods: {}
+  methods: {
+    changeEmail: function() {
+      this.user.email = "bartoast@gmail.com";
+    }
+  }
 };
 </script>
