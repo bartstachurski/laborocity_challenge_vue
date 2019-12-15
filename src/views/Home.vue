@@ -24,7 +24,10 @@
           </span>
         </label>
         <ul v-if="user.skills.find(userSkill => userSkill.id === skill.id)">
-          <li v-for="skillSubcategory in skill.skill_subcategories">{{ skillSubcategory.name }}</li>
+          <li v-for="skillSubcategory in skill.skill_subcategories">
+            <input type="checkbox" :checked="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)" @change="toggleSkillExperience(skillSubcategory)">
+            {{ skillSubcategory.name }}
+          </li>
         </ul>
       </li>
     </ul>
@@ -63,6 +66,20 @@ export default {
         this.user.skills.splice(skillToDeleteIndex, 1);
       } else {
         this.user.skills.push(skill);
+      }
+    },
+    toggleSkillExperience: function(skillSubcategory) {
+      console.log(this.user.skill_experiences);
+      if (this.user.skill_experiences.find(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)) {
+        var skillExperienceToDeleteIndex = (this.user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id));
+        this.user.skill_experiences.splice(skillExperienceToDeleteIndex, 1);
+      } else {
+        this.user.skill_experiences.push({
+          skill_subcategory_id: skillSubcategory.id,
+          user_id: this.user.id,
+          years_experience: 1
+        });
+        console.log(this.user.skill_experiences);
       }
     }
   }
