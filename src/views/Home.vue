@@ -1,47 +1,61 @@
 <template>
+  
   <div class="home">
-    <!-- <p>{{ user }}</p> -->
-    <ul class="content-navbar">
-      <li>Skills</li>
-      <li>Equipment</li>
-      <li>Certifications</li>
-    </ul>
-    <div>
-      <img src="../assets/skills_header_image_1.svg">
+    <div class="container">
+      <div class="row d-flex justify-content-around">
+        <div class="column">Skills</div>
+        <div class="column">Equipment</div>
+        <div class="column">Certifications</div>
+      </div>
+      <div class="row d-flex justify-content-around">
+        <img src="../assets/skills_header_image_1.svg">
+      </div>
+      <div class="instruction">
+        Here you can select your interests and experiences
+      </div>
+      <ul>
+        <li v-for="skill in skills" class="skillMenuItem">
+         <div>{{ skill.name }}</div>
+          <div><label class="switch-light" onclick="">
+            <input :checked="user.skills.find(userSkill => userSkill.id === skill.id)" type="checkbox" @change="toggleSkill(skill)">
+            <span class="alert alert-light">
+              <span>No</span>
+              <span>Yes</span>
+              <a class="btn btn-primary"></a>
+            </span>
+          </label></div>
+          <ul v-if="user.skills.find(userSkill => userSkill.id === skill.id)">
+            <li v-for="skillSubcategory in skill.skill_subcategories">
+              <input type="checkbox" :checked="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)" @change="toggleSkillExperience(skillSubcategory)">
+              <div>{{ skillSubcategory.name }}</div>
+              <div>My Experience: {{ user.skill_experiences.find(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id) }}</div>
+              <div v-if="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)">
+                  <vue-slider v-bind="vueSliderOptions" v-model="user.skill_experiences[user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience">
+                    <template v-slot:dot>
+                      <img class ="sliderSquare" src="../assets/slider_square.png">
+                    </template>
+                  </vue-slider>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
-    <div class="instruction">
-      Here you can select your interests and experiences
-    </div>
-    <ul>
-      <li v-for="skill in skills">
-       {{ skill.name }}
-        <label class="switch-light" onclick="">
-          <input :checked="user.skills.find(userSkill => userSkill.id === skill.id)" type="checkbox" @change="toggleSkill(skill)">
-          <span class="alert alert-light">
-            <span>Off</span>
-            <span>On</span>
-            <a class="btn btn-primary"></a>
-          </span>
-        </label>
-        <ul v-if="user.skills.find(userSkill => userSkill.id === skill.id)">
-          <li v-for="skillSubcategory in skill.skill_subcategories">
-            <input type="checkbox" :checked="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)" @change="toggleSkillExperience(skillSubcategory)">
-            {{ skillSubcategory.name }}
-            <div v-if="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)">
-                <vue-slider v-bind="vueSliderOptions" v-model="user.skill_experiences[user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience">
-                  <template v-slot:dot>
-                    <img src="../assets/slider_square.png">
-                  </template>
-                </vue-slider>
-            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
   </div>
 </template>
 
 <style>
+.sliderSquare {
+  height: 20px;
+  width: 27px;
+}
+.skillMenuItem {
+  min-height: 47px;
+  left: 15px;
+}
+.container {
+  align-content: center;
+}
 </style>
 
 <script>

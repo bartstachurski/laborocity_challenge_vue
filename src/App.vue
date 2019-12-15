@@ -13,6 +13,9 @@
 
 <style>
 @import '../node_modules/css-toggle-switch/dist/toggle-switch.css';
+ul {
+  list-style-type: none;
+}
 #app {
   font-family: 'Neuton', serif;
   font-family: 'Montserrat', sans-serif;
