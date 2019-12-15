@@ -15,17 +15,18 @@
     <ul>
       <li v-for="skill in skills">
        {{ skill.name }}
-        <fieldset>
-          <div class="switch-toggle alert alert-light">
-            <input id="week" name="view" type="radio" checked>
-            <label for="week" onclick="">Week</label>
+        <label class="switch-light" onclick="">
+          <input :checked="user.skills.find(userSkill => userSkill.id === skill.id)" type="checkbox">
+          <strong>
+            Wireless
+          </strong>
 
-            <input id="month" name="view" type="radio">
-            <label for="month" onclick="">Month</label>
-
+          <span class="alert alert-light">
+            <span>Off</span>
+            <span>On</span>
             <a class="btn btn-primary"></a>
-          </div>
-        </fieldset>
+          </span>
+        </label>
       </li>
     </ul>
   </div>
