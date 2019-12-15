@@ -12,6 +12,7 @@
 </template>
 
 <style>
+@import '../node_modules/css-toggle-switch/dist/toggle-switch.css';
 #app {
   font-family: 'Neuton', serif;
   font-family: 'Montserrat', sans-serif;
