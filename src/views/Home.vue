@@ -23,6 +23,9 @@
             <a class="btn btn-primary"></a>
           </span>
         </label>
+        <ul v-if="user.skills.find(userSkill => userSkill.id === skill.id)">
+          <li v-for="skillSubcategory in skill.skill_subcategories">{{ skillSubcategory.name }}</li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -38,7 +41,8 @@ export default {
   data: function() {
     return {
       user: {},
-      skills: []
+      skills: [],
+      skillSubcategories: []
     };
   },
   created: function() {
@@ -58,11 +62,7 @@ export default {
         var skillToDeleteIndex = (this.user.skills.findIndex(userSkills => userSkills.id === skill.id));
         this.user.skills.splice(skillToDeleteIndex, 1);
       } else {
-        console.log("user skills before adding skill");
-        console.log(this.user.skills);
         this.user.skills.push(skill);
-        console.log("user skills after adding skill");
-        console.log(this.user.skills);
       }
     }
   }
