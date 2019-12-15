@@ -1,7 +1,20 @@
 <template>
   <div class="home">
-    <!-- <h1>{{ user }}</h1> -->
-    <!-- <button v-on:click="changeEmail">Click me to change user.name to Bartoast</button> -->
+    <!-- <p>{{ user }}</p> -->
+    <ul class="content-navbar">
+      <li>Skills</li>
+      <li>Equipment</li>
+      <li>Certifications</li>
+    </ul>
+    <div>
+      <img src="../assets/skills_header_image_1.svg">
+    </div>
+    <div class="instruction">
+      Here you can select your interests and experiences
+    </div>
+    <ul>
+      <li v-for="skill in skills"> {{ skill.name }}</li>
+    </ul>
   </div>
 </template>
 
@@ -14,12 +27,16 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      user: {}
+      user: {},
+      skills: []
     };
   },
   created: function() {
     axios.get("/api/users/1").then(response => {
       this.user = response.data;
+    });
+    axios.get("/api/skills").then(response => {
+      this.skills = response.data;
     });
   },
   methods: {
