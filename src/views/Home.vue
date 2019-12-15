@@ -28,8 +28,11 @@
             <input type="checkbox" :checked="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)" @change="toggleSkillExperience(skillSubcategory)">
             {{ skillSubcategory.name }}
             <div v-if="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)">
-                <vue-slider v-model="user.skill_experiences[user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience"></vue-slider>
-                <button v-on:click="testModel(skillSubcategory)">Test Model</button>
+                <vue-slider v-bind="vueSliderOptions" v-model="user.skill_experiences[user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience">
+                  <template v-slot:dot>
+                    <img src="../assets/slider_square.png">
+                  </template>
+                </vue-slider>
             </div>
           </li>
         </ul>
@@ -49,7 +52,11 @@ export default {
     return {
       user: {},
       skills: [],
-      skillSubcategories: []
+      skillSubcategories: [],
+      vueSliderOptions: {
+        min: 0,
+        max: 10
+      }
     };
   },
   created: function() {
