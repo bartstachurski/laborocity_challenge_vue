@@ -27,6 +27,10 @@
           <li v-for="skillSubcategory in skill.skill_subcategories">
             <input type="checkbox" :checked="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)" @change="toggleSkillExperience(skillSubcategory)">
             {{ skillSubcategory.name }}
+            <div v-if="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)">
+                <vue-slider v-model="user.skill_experiences[user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience"></vue-slider>
+                <button v-on:click="testModel(skillSubcategory)">Test Model</button>
+            </div>
           </li>
         </ul>
       </li>
@@ -57,6 +61,10 @@ export default {
     });
   },
   methods: {
+    testModel: function(skillSubcategory) {
+      // console.log(this.user.skill_experiences[this.user.skill_experiences.find(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)]);
+      console.log(this.user.skill_experiences[this.user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience);
+    },
     changeEmail: function() {
       this.user.email = "bartoast@gmail.com";
     },
