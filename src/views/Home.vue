@@ -79,7 +79,7 @@ export default {
           user_id: this.user.id,
           years_experience: 1
         });
-        console.log(this.user.skill_experiences);
+        console.log(this.user);
       }
     }
   }
