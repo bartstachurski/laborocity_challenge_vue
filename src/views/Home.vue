@@ -80,7 +80,8 @@
               </div>
               <div class="row" v-for="skill in user.skills">
                 <div class="column">{{ skill.name }} Items</div>
-                <div v-for="" class="row">
+                <!-- here is where you were last working trying to filter the equipment results by user skills -->
+                <div v-for="equipment in filterBy(equipments, skill.id, '')" class="row">
                 <div class="column"></div>
               </div>
             </div>
