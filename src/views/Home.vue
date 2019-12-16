@@ -80,14 +80,14 @@
               </div>
               <div v-for="userSkill in user.skills">
                 <div class="row">
-                  <div class="column">{{ userSkill.name }} Items</div>
+                  <div class="col-9">{{ userSkill.name }} Items</div>
                 </div>
                 <!-- here is where you were last working trying to filter the equipment results by user skills -->
                 <div v-for="skill in filterBy(skills, userSkill.id, 'id')">
                   <!-- <div> {{ skill }} </div> -->
                   <div v-for="equipment in skill.equipments" class="row">
-                    <div class="column"> {{ equipment.name }} </div>
-                    <div class="column">
+                    <div class="col-9"> {{ equipment.name }} </div>
+                    <div class="col-3">
                       <label class="switch-light" onclick="">
                       <input :checked="user.equipments.find(userEquipment => userEquipment.id === equipment.id)" type="checkbox" @change="toggleEquipment(equipment)">
                       <span class="alert alert-light">
