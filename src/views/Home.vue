@@ -68,7 +68,26 @@
       </div>
       
       <div v-if="view === 'equipment'">
-        <div>Hello from the equipment page</div>
+        <div class="row d-flex justify-content-center">
+          <div class="column">
+            <div v-if="user.skills.length == 0" class="instruction">
+              <div>You currently have no skills  to add equipment under.</div>
+              <div>Please go back to the Skills tab to add some of your skills  and interests.</div>
+            </div>
+            <div v-else>
+              <div class="instruction">
+                Do you have the following equipment for your selections?
+              </div>
+              <div class="row" v-for="skill in user.skills">
+                <div class="column">{{ skill.name }} Items</div>
+                <div v-for="" class="row">
+                <div class="column"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div>{{ user.equipments }}</div> -->
+        <!-- <div>{{ user }}</div> -->
       </div>
 
     </div>
@@ -115,6 +134,7 @@ export default {
       view: 'skills',
       user: {},
       skills: [],
+      equipments: [],
       skillSubcategories: [],
       vueSliderOptions: {
         min: 0,
@@ -128,6 +148,9 @@ export default {
     });
     axios.get("/api/skills").then(response => {
       this.skills = response.data;
+    });
+    axios.get("/api/equipments").then(response => {
+      this.equipments = response.data;
     });
   },
   methods: {
