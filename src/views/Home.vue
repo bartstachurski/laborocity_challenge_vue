@@ -34,22 +34,35 @@
             </label>
           </div>
         </div>
-        <ul v-if="user.skills.find(userSkill => userSkill.id === skill.id)">
-          <li v-for="skillSubcategory in skill.skill_subcategories">
-            <input type="checkbox" :checked="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)" @change="toggleSkillExperience(skillSubcategory)">
-            <div>{{ skillSubcategory.name }}</div>
-            <div>My Experience: {{ user.skill_experiences.find(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id) }}</div>
-            <div v-if="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)">
+        <div v-if="user.skills.find(userSkill => userSkill.id === skill.id)">
+          <div v-for="skillSubcategory in skill.skill_subcategories">
+            <div class="row">
+              <div class="col-1">
+                <input type="checkbox" :checked="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)" @change="toggleSkillExperience(skillSubcategory)">
+              </div>
+              <div class="col-3">
+                {{ skillSubcategory.name }}
+              </div>
+              <div class="col-6 experienceHeading text-right">
+                My Experience:
+              </div>
+              <div class="col-2 experienceYears text-left" v-if="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)">
+                <!-- 5 Years -->
+                {{ user.skill_experiences[user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience }} Years
+              </div>
+            </div>
+            <div class="row" v-if="user.skill_experiences.find(userSkillExperience => userSkillExperience.skill_subcategory_id === skillSubcategory.id)">
+              <div class="col-12">
                 <vue-slider v-bind="vueSliderOptions" v-model="user.skill_experiences[user.skill_experiences.findIndex(skillExperience => skillExperience.skill_subcategory_id === skillSubcategory.id)].years_experience">
                   <template v-slot:dot>
                     <img class ="sliderSquare" src="../assets/slider_square.png">
                   </template>
                 </vue-slider>
+              </div>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -65,6 +78,22 @@
 }
 .container {
   align-content: center;
+}
+.experienceHeading {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #787878;
+}
+.experienceYears {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  color: #787878;
 }
 
 </style>
