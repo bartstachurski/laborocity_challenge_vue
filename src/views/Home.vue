@@ -71,18 +71,34 @@
         <div class="row d-flex justify-content-center">
           <div class="column">
             <div v-if="user.skills.length == 0" class="instruction">
-              <div>You currently have no skills  to add equipment under.</div>
-              <div>Please go back to the Skills tab to add some of your skills  and interests.</div>
+              <div>You currently have no skills to add equipment under.</div>
+              <div>Please go back to the Skills tab to add some of your skills  and interests.</div>
             </div>
             <div v-else>
               <div class="instruction">
                 Do you have the following equipment for your selections?
               </div>
-              <div class="row" v-for="skill in user.skills">
-                <div class="column">{{ skill.name }} Items</div>
+              <div v-for="userSkill in user.skills">
+                <div class="row">
+                  <div class="column">{{ userSkill.name }} Items</div>
+                </div>
                 <!-- here is where you were last working trying to filter the equipment results by user skills -->
-                <div v-for="equipment in filterBy(equipments, skill.id, '')" class="row">
-                <div class="column"></div>
+                <div v-for="skill in filterBy(skills, userSkill.id, 'id')">
+                  <!-- <div> {{ skill }} </div> -->
+                  <div v-for="equipment in skill.equipments" class="row">
+                    <div class="column"> {{ equipment.name }} </div>
+                    <div class="column">
+                      <label class="switch-light" onclick="">
+                      <input :checked="user.equipments.find(userEquipment => userEquipment.id === equipment.id)" type="checkbox" @change="toggleEquipment(equipment)">
+                      <span class="alert alert-light">
+                        <span>No</span>
+                        <span>Yes</span>
+                        <a class="btn btn-primary"></a>
+                      </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -128,8 +144,10 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from 'vue2-filters';
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       view: 'skills',
@@ -173,6 +191,15 @@ export default {
       } else {
         this.user.skills.push(skill);
       }
+    },
+    toggleEquipment: function(equipment) {
+      console.log(equipment);
+      // if (this.user.skills.find(userSkill => userSkill.id === skill.id)) {
+      //   var skillToDeleteIndex = (this.user.skills.findIndex(userSkills => userSkills.id === skill.id));
+      //   this.user.skills.splice(skillToDeleteIndex, 1);
+      // } else {
+      //   this.user.skills.push(skill);
+      // }
     },
     toggleSkillExperience: function(skillSubcategory) {
       console.log(this.user.skill_experiences);

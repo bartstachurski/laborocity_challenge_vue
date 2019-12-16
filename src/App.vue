@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <router-link to="/" class="navbar-left"><img class="logo" src="../src/assets/laborocity_logo_main.png"></router-link>
